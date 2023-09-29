@@ -18,8 +18,8 @@ export default defineConfig({
         }
       }
     }),
-    glsl()
-    // vueJsx()
+    glsl(),
+    vueJsx()
   ],
   resolve: {
     alias: {

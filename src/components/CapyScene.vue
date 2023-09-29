@@ -74,7 +74,7 @@ onLoop(({ elapsed }) => {
       <TresPlaneGeometry :args="[2, 1]" />
       <TresShaderMaterial v-bind="shader" :transparent="true" />
     </TresMesh>
-    <!-- path="/capybara.gltf" -->
+
     <Suspense>
       <Levioso>
         <primitive
@@ -85,7 +85,7 @@ onLoop(({ elapsed }) => {
           :rotation-z="Math.PI * 0.85"
           :rotation-y="Math.PI * 1"
         />
-
+        <!-- error with compiling  && path="/capybara.gltf" -->
         <!-- <GLTFModel
           :scale="[0.015, 0.015, 0.015]"
           :position="[0, 0, -3]"
