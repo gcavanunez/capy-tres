@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { watchEffect, shallowRef } from 'vue'
-import { Levioso, GLTFModel } from '@tresjs/cientos'
+import { Levioso, GLTFModel, useGLTF } from '@tresjs/cientos'
 import { TresCanvas, useRenderLoop, type ThreeEvent } from '@tresjs/core'
 import { useMouse, useWindowSize } from '@vueuse/core'
 import { Vector2, BasicShadowMap } from 'three'
@@ -33,6 +33,12 @@ const updateUniforms = (ev: ThreeEvent<PointerEvent>) => {
 }
 
 const { onLoop } = useRenderLoop()
+const { scene } = await useGLTF(
+  'https://raw.githubusercontent.com/gcavanunez/capy-tres/main/public/capybara.gltf',
+  {
+    draco: true
+  }
+)
 
 onLoop(({ elapsed }) => {
   if (box.value) {
@@ -68,10 +74,19 @@ onLoop(({ elapsed }) => {
       <TresPlaneGeometry :args="[2, 1]" />
       <TresShaderMaterial v-bind="shader" :transparent="true" />
     </TresMesh>
+    <!-- path="/capybara.gltf" -->
     <Suspense>
       <Levioso>
-        <!-- path="/capybara.gltf" -->
-        <GLTFModel
+        <primitive
+          :object="scene"
+          :scale="[0.015, 0.015, 0.015]"
+          :position="[0, 0, -3]"
+          :rotation-x="Math.PI * 0.5"
+          :rotation-z="Math.PI * 0.85"
+          :rotation-y="Math.PI * 1"
+        />
+
+        <!-- <GLTFModel
           :scale="[0.015, 0.015, 0.015]"
           :position="[0, 0, -3]"
           :rotation-x="Math.PI * 0.5"
@@ -80,7 +95,7 @@ onLoop(({ elapsed }) => {
           path="https://raw.githubusercontent.com/gcavanunez/capy-tres/main/public/capybara.gltf"
           draco
           ref="modelRef"
-        />
+        /> -->
       </Levioso>
     </Suspense>
     <TresPointLight ref="spotLightRef" :args="[0xffffff, 7.5]" cast-shadow name="light" />

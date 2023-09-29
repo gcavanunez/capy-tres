@@ -10,15 +10,16 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 export default defineConfig({
   plugins: [
     vue({
-      ...templateCompilerOptions
-      // template: {
-      //   compilerOptions: {
-      //     isCustomElement: (tag) => tag.startsWith('Tres') && tag !== 'TresCanvas'
-      //   }
-      // }
+      // ...templateCompilerOptions
+      template: {
+        compilerOptions: {
+          isCustomElement: (tag) =>
+            (tag.startsWith('Tres') && tag !== 'TresCanvas') || tag === 'primitive'
+        }
+      }
     }),
-    glsl(),
-    vueJsx()
+    glsl()
+    // vueJsx()
   ],
   resolve: {
     alias: {
