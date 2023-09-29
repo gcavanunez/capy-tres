@@ -70,13 +70,14 @@ onLoop(({ elapsed }) => {
     </TresMesh>
     <Suspense>
       <Levioso>
+        <!-- path="/capybara.gltf" -->
         <GLTFModel
           :scale="[0.015, 0.015, 0.015]"
           :position="[0, 0, -3]"
           :rotation-x="Math.PI * 0.5"
           :rotation-z="Math.PI * 0.85"
           :rotation-y="Math.PI * 1"
-          path="/capybara.gltf"
+          path="https://raw.githubusercontent.com/gcavanunez/capy-tres/main/public/capybara.gltf"
           draco
           ref="modelRef"
         />
